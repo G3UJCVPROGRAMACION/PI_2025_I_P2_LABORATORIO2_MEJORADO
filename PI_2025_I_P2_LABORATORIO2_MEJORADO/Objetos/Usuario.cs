@@ -13,6 +13,8 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public string Identificacion { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
+        public DateTime FechaRegistro { get; set; } // Nueva propiedad
+        public bool EsActivo { get; set; } // Nueva propiedad
         public List<Libro> LibrosPrestados { get; set; } = new List<Libro>();
 
         public Usuario(string nombre, string apellido, string identificacion, string correo, string telefono)
@@ -22,11 +24,14 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             Identificacion = identificacion;
             Correo = correo;
             Telefono = telefono;
+            FechaRegistro = DateTime.Now;
+            EsActivo = true;
         }
 
         public virtual void MostrarInformacion()
         {
             Console.WriteLine($"Nombre: {Nombre} {Apellido}, Identificación: {Identificacion}, Correo: {Correo}, Teléfono: {Telefono}");
+            Console.WriteLine($"Fecha de Registro: {FechaRegistro.ToShortDateString()}, Estado: {(EsActivo ? "Activo" : "Inactivo")}");
         }
 
         public void PrestarLibro(Libro libro)
@@ -62,20 +67,19 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public bool Validar()
         {
             return !string.IsNullOrWhiteSpace(Nombre) &&
-                   !string.IsNullOrWhiteSpace(Apellido) &&
-                   !string.IsNullOrWhiteSpace(Identificacion) &&
-                   ValidarCorreoElectronico(Correo) && 
-                   ValidarTelefono(Telefono); 
+             !string.IsNullOrWhiteSpace(Apellido) &&
+             !string.IsNullOrWhiteSpace(Identificacion) &&
+             ValidarCorreoElectronico(Correo) && // Validar correo electrónico
+             ValidarTelefono(Telefono); // Validar teléfono
         }
-
         private bool ValidarTelefono(string telefono)
         {
-            return telefono.All(char.IsDigit); 
+            return telefono.All(char.IsDigit); // Solo caracteres numéricos
         }
 
         private bool ValidarCorreoElectronico(string correo)
         {
-            return correo.Contains("@"); 
+            return correo.Contains("@"); // Debe contener el carácter @
         }
     }   
 }

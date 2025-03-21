@@ -51,6 +51,7 @@
     <Compile Include="Objetos\Libro.cs" />
     <Compile Include="Objetos\Profesor.cs" />
     <Compile Include="Objetos\Usuario.cs" />
+    <Compile Include="Objetos\Validaciones.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

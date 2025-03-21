@@ -20,17 +20,15 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             {
                 try
                 {
-                    WriteLine("Bienvenido al inventario de la Biblioteca UJCV");
-                    WriteLine("Menú de opciones");
-                    WriteLine("1. Agregar Libro");
-                    WriteLine("2. Buscar Libro");
-                    WriteLine("3. Listar Libros");
-                    WriteLine("4. Prestar Libro");
-                    WriteLine("5. Devolver Libro");
-                    WriteLine("6. Agregar Usuario");
-                    WriteLine("7. Salir");
-                    Write("Seleccione una opción: ");
-                    string opcion = ReadLine();
+                    Console.WriteLine("1. Agregar Libro");
+                    Console.WriteLine("2. Buscar Libro");
+                    Console.WriteLine("3. Listar Libros");
+                    Console.WriteLine("4. Prestar Libro");
+                    Console.WriteLine("5. Devolver Libro");
+                    Console.WriteLine("6. Agregar Usuario");
+                    Console.WriteLine("7. Salir");
+                    Console.Write("Seleccione una opción: ");
+                    string opcion = Console.ReadLine();
 
                     switch (opcion)
                     {
@@ -55,105 +53,110 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                         case "7":
                             return;
                         default:
-                            WriteLine("Opción no válida. Ingrese un numero entre 1 y 7");
+                            Console.WriteLine("Opción no válida.");
                             break;
                     }
                 }
                 catch (EntradaNoValidaException ex)
                 {
-                    WriteLine($"Error: {ex.Message}");
-                    WriteLine("\nPresione cualquier tecla para continuar..."); 
-                    ReadKey();
-                    Clear();
+                    Console.WriteLine($"Error: {ex.Message}");
+                    Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    Console.Clear();
                 }
                 catch (Exception ex)
                 {
-                    WriteLine($"Error inesperado: {ex.Message}");
-                    WriteLine("\nPresione cualquier tecla para continuar..."); 
-                    ReadKey();
-                    Clear();
+                    Console.WriteLine($"Error inesperado: {ex.Message}");
+                    Console.WriteLine("\nPresione cualquier tecla para continuar...");
+                    Console.ReadKey();
+                    Console.Clear();
                 }
             }
         }
 
         static void AgregarLibro()
         {
-            Write("Título (1-50 caracteres): ");
-            string titulo = ValidarEntradaTexto(1, 50);
+            Console.Write("Título (1-50 caracteres): ");
+            string titulo = Validaciones.ValidarEntradaTexto(1, 50, "Título (1-50 caracteres): ");
 
-            Write("ISBN (10-13 caracteres): ");
-            string isbn = ValidarEntradaTexto(10, 13);
+            Console.Write("ISBN (10-13 caracteres): ");
+            string isbn = Validaciones.ValidarEntradaTexto(10, 13, "ISBN (10-13 caracteres): ");
 
-            Write("Año de Publicación (hasta {0}): ", DateTime.Now.Year);
-            int añoPublicacion = ValidarEntero(1000, DateTime.Now.Year);
+            if (!Validaciones.ValidarLibroUnico(libros, titulo, isbn))
+            {
+                throw new EntradaNoValidaException("El libro ya existe (título o ISBN duplicado).");
+            }
 
-            Write("Cantidad de Ejemplares: ");
-            int cantidadEjemplares = ValidarEntero(1, int.MaxValue);
+            Console.Write("Año de Publicación (hasta {0}): ", DateTime.Now.Year);
+            int añoPublicacion = Validaciones.ValidarEntero(1000, DateTime.Now.Year, $"Año de Publicación (hasta {DateTime.Now.Year}): ");
 
-            Write("Nombre del Autor (1-50 caracteres): ");
-            string nombreAutor = ValidarEntradaTexto(1, 50);
-            Write("Apellido del Autor (1-50 caracteres): ");
-            string apellidoAutor = ValidarEntradaTexto(1, 50);
+            Console.Write("Cantidad de Ejemplares: ");
+            int cantidadEjemplares = Validaciones.ValidarEntero(1, int.MaxValue, "Cantidad de Ejemplares: ");
+
+            Console.Write("Nombre del Autor (1-50 caracteres): ");
+            string nombreAutor = Validaciones.ValidarEntradaTexto(1, 50, "Nombre del Autor (1-50 caracteres): ");
+            Console.Write("Apellido del Autor (1-50 caracteres): ");
+            string apellidoAutor = Validaciones.ValidarEntradaTexto(1, 50, "Apellido del Autor (1-50 caracteres): ");
             Autor autor = autores.FirstOrDefault(a => a.Nombre == nombreAutor && a.Apellido == apellidoAutor);
             if (autor == null)
             {
-                Write("Nacionalidad del Autor (1-50 caracteres): ");
-                string nacionalidad = ValidarEntradaTexto(1, 50);
+                Console.Write("Nacionalidad del Autor (1-50 caracteres): ");
+                string nacionalidad = Validaciones.ValidarEntradaTexto(1, 50, "Nacionalidad del Autor (1-50 caracteres): ");
 
-                Write("Año de Nacimiento del Autor (hasta {0}): ", DateTime.Now.Year);
-                int añoNacimiento = ValidarEntero(1000, DateTime.Now.Year);
+                Console.Write("Año de Nacimiento del Autor (hasta {0}): ", DateTime.Now.Year);
+                int añoNacimiento = Validaciones.ValidarEntero(1000, DateTime.Now.Year, $"Año de Nacimiento del Autor (hasta {DateTime.Now.Year}): ");
 
-                Write("Cantidad de Libros Publicados: ");
-                int cantidadLibrosPublicados = ValidarEntero(0, int.MaxValue);
+                Console.Write("Cantidad de Libros Publicados: ");
+                int cantidadLibrosPublicados = Validaciones.ValidarEntero(0, int.MaxValue, "Cantidad de Libros Publicados: ");
 
                 autor = new Autor(nombreAutor, apellidoAutor, nacionalidad, añoNacimiento, cantidadLibrosPublicados);
                 autores.Add(autor);
             }
 
-            Write("Nombre de la Editorial (1-50 caracteres): ");
-            string nombreEditorial = ValidarEntradaTexto(1, 50);
+            Console.Write("Nombre de la Editorial (1-50 caracteres): ");
+            string nombreEditorial = Validaciones.ValidarEntradaTexto(1, 50, "Nombre de la Editorial (1-50 caracteres): ");
             Editorial editorial = editoriales.FirstOrDefault(e => e.Nombre == nombreEditorial);
             if (editorial == null)
             {
-                Write("País de la Editorial (1-50 caracteres): ");
-                string pais = ValidarEntradaTexto(1, 50);
+                Console.Write("País de la Editorial (1-50 caracteres): ");
+                string pais = Validaciones.ValidarEntradaTexto(1, 50, "País de la Editorial (1-50 caracteres): ");
 
-                Write("Dirección de la Editorial (1-100 caracteres): ");
-                string direccion = ValidarEntradaTexto(1, 100);
+                Console.Write("Dirección de la Editorial (1-100 caracteres): ");
+                string direccion = Validaciones.ValidarEntradaTexto(1, 100, "Dirección de la Editorial (1-100 caracteres): ");
 
-                Write("Teléfono de la Editorial (solo números): ");
-                string telefono = ValidarTelefono();
+                Console.Write("Teléfono de la Editorial (solo números): ");
+                string telefono = Validaciones.ValidarTelefono("Teléfono de la Editorial (solo números): ");
 
-                Write("Correo Electrónico de la Editorial (debe contener @): ");
-                string correoElectronico = ValidarCorreoElectronico();
+                Console.Write("Correo Electrónico de la Editorial (debe contener @): ");
+                string correoElectronico = Validaciones.ValidarCorreoElectronico("Correo Electrónico de la Editorial (debe contener @): ");
 
                 editorial = new Editorial(nombreEditorial, pais, direccion, telefono, correoElectronico);
                 editoriales.Add(editorial);
             }
 
-            Write("Nombre del Género Literario (1-50 caracteres): ");
-            string nombreGenero = ValidarEntradaTexto(1, 50);
+            Console.Write("Nombre del Género Literario (1-50 caracteres): ");
+            string nombreGenero = Validaciones.ValidarEntradaTexto(1, 50, "Nombre del Género Literario (1-50 caracteres): ");
             GeneroLiterario genero = generos.FirstOrDefault(g => g.Nombre == nombreGenero);
             if (genero == null)
             {
-                Write("Tema del Género Literario (1-50 caracteres): ");
-                string tema = ValidarEntradaTexto(1, 50);
+                Console.Write("Tema del Género Literario (1-50 caracteres): ");
+                string tema = Validaciones.ValidarEntradaTexto(1, 50, "Tema del Género Literario (1-50 caracteres): ");
 
                 genero = new GeneroLiterario(nombreGenero, tema);
                 generos.Add(genero);
             }
 
             libros.Add(new Libro(titulo, autor, editorial, genero, isbn, añoPublicacion, cantidadEjemplares));
-            WriteLine("Libro agregado correctamente.");
-            WriteLine("\nPresione cualquier tecla para continuar..."); 
-            ReadKey();
-            Clear();
+            Console.WriteLine("Libro agregado correctamente.");
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         static void BuscarLibro()
         {
-            Write("Ingrese el título del libro a buscar: ");
-            string titulo = ReadLine();
+            Console.Write("Ingrese el título del libro a buscar: ");
+            string titulo = Console.ReadLine();
             var libro = libros.FirstOrDefault(l => l.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
             if (libro != null)
             {
@@ -163,9 +166,9 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             {
                 throw new EntradaNoValidaException("Libro no encontrado.");
             }
-            WriteLine("\nPresione cualquier tecla para continuar..."); 
-            ReadKey();
-            Clear();
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         static void ListarLibros()
@@ -178,27 +181,27 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             foreach (var libro in libros)
             {
                 libro.MostrarInformacion();
-                WriteLine();
+                Console.WriteLine();
             }
-            WriteLine("\nPresione cualquier tecla para continuar..."); 
-            ReadKey();
-            Clear();
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         static void PrestarLibro()
         {
-            Write("Ingrese el título del libro a prestar: ");
-            string titulo = ReadLine();
+            Console.Write("Ingrese el título del libro a prestar: ");
+            string titulo = Console.ReadLine();
             var libro = libros.FirstOrDefault(l => l.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
             if (libro == null)
             {
                 throw new EntradaNoValidaException("Libro no encontrado.");
             }
 
-            Write("Ingrese el nombre del usuario: ");
-            string nombreUsuario = ReadLine();
-            Write("Ingrese el apellido del usuario: ");
-            string apellidoUsuario = ReadLine();
+            Console.Write("Ingrese el nombre del usuario: ");
+            string nombreUsuario = Console.ReadLine();
+            Console.Write("Ingrese el apellido del usuario: ");
+            string apellidoUsuario = Console.ReadLine();
             var usuario = usuarios.FirstOrDefault(u => u.Nombre.Equals(nombreUsuario, StringComparison.OrdinalIgnoreCase) && u.Apellido.Equals(apellidoUsuario, StringComparison.OrdinalIgnoreCase));
             if (usuario == null)
             {
@@ -206,25 +209,25 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             }
 
             usuario.PrestarLibro(libro);
-            WriteLine("\nPresione cualquier tecla para continuar..."); 
-            ReadKey();
-            Clear();
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         static void DevolverLibro()
         {
-            Write("Ingrese el título del libro a devolver: ");
-            string titulo = ReadLine();
+            Console.Write("Ingrese el título del libro a devolver: ");
+            string titulo = Console.ReadLine();
             var libro = libros.FirstOrDefault(l => l.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
             if (libro == null)
             {
                 throw new EntradaNoValidaException("Libro no encontrado.");
             }
 
-            Write("Ingrese el nombre del usuario: ");
-            string nombreUsuario = ReadLine();
-            Write("Ingrese el apellido del usuario: ");
-            string apellidoUsuario = ReadLine();
+            Console.Write("Ingrese el nombre del usuario: ");
+            string nombreUsuario = Console.ReadLine();
+            Console.Write("Ingrese el apellido del usuario: ");
+            string apellidoUsuario = Console.ReadLine();
             var usuario = usuarios.FirstOrDefault(u => u.Nombre.Equals(nombreUsuario, StringComparison.OrdinalIgnoreCase) && u.Apellido.Equals(apellidoUsuario, StringComparison.OrdinalIgnoreCase));
             if (usuario == null)
             {
@@ -232,137 +235,62 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             }
 
             usuario.DevolverLibro(libro);
-            WriteLine("\nPresione cualquier tecla para continuar..."); 
-            ReadKey();
-            Clear();
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
 
         static void AgregarUsuario()
         {
-            Write("Nombre del usuario (1-50 caracteres): ");
-            string nombre = ValidarEntradaTexto(1, 50);
+            Console.Write("Nombre del usuario (1-50 caracteres): ");
+            string nombre = Validaciones.ValidarEntradaTexto(1, 50, "Nombre del usuario (1-50 caracteres): ");
 
-            Write("Apellido del usuario (1-50 caracteres): ");
-            string apellido = ValidarEntradaTexto(1, 50);
+            Console.Write("Apellido del usuario (1-50 caracteres): ");
+            string apellido = Validaciones.ValidarEntradaTexto(1, 50, "Apellido del usuario (1-50 caracteres): ");
 
-            Write("Identificación del usuario (1-20 caracteres): ");
-            string identificacion = ValidarEntradaTexto(1, 20);
+            Console.Write("Identificación del usuario (1-20 caracteres): ");
+            string identificacion = Validaciones.ValidarEntradaTexto(1, 20, "Identificación del usuario (1-20 caracteres): ");
 
-            Write("Correo electrónico del usuario (debe contener @): ");
-            string correo = ValidarCorreoElectronico();
+            if (!Validaciones.ValidarUsuarioUnico(usuarios, identificacion))
+            {
+                throw new EntradaNoValidaException("El usuario ya existe (identificación duplicada).");
+            }
 
-            Write("Teléfono del usuario (solo números): ");
-            string telefono = ValidarTelefono();
+            Console.Write("Correo electrónico del usuario (debe contener @): ");
+            string correo = Validaciones.ValidarCorreoElectronico("Correo electrónico del usuario (debe contener @): ");
 
-            Write("¿Es un profesor o un estudiante? (P/E): ");
-            string tipoUsuario = ReadLine().ToUpper();
+            Console.Write("Teléfono del usuario (solo números): ");
+            string telefono = Validaciones.ValidarTelefono("Teléfono del usuario (solo números): ");
+
+            Console.Write("¿Es un profesor o un estudiante? (P/E): ");
+            string tipoUsuario = Console.ReadLine().ToUpper();
 
             if (tipoUsuario == "P")
             {
-                Write("Departamento del profesor (1-50 caracteres): ");
-                string departamento = ValidarEntradaTexto(1, 50);
+                Console.Write("Departamento del profesor (1-50 caracteres): ");
+                string departamento = Validaciones.ValidarEntradaTexto(1, 50, "Departamento del profesor (1-50 caracteres): ");
 
                 Profesor profesor = new Profesor(nombre, apellido, identificacion, correo, telefono, departamento);
                 usuarios.Add(profesor);
-                WriteLine("Profesor agregado correctamente.");
+                Console.WriteLine("Profesor agregado correctamente.");
             }
             else if (tipoUsuario == "E")
             {
-                Write("Carrera del estudiante (1-50 caracteres): ");
-                string carrera = ValidarEntradaTexto(1, 50);
+                Console.Write("Carrera del estudiante (1-50 caracteres): ");
+                string carrera = Validaciones.ValidarEntradaTexto(1, 50, "Carrera del estudiante (1-50 caracteres): ");
 
                 Estudiante estudiante = new Estudiante(nombre, apellido, identificacion, correo, telefono, carrera);
                 usuarios.Add(estudiante);
-                WriteLine("Estudiante agregado correctamente.");
+                Console.WriteLine("Estudiante agregado correctamente.");
             }
             else
             {
                 throw new EntradaNoValidaException("Opción no válida. Debe ser 'P' para profesor o 'E' para estudiante.");
             }
 
-               WriteLine("\nPresione cualquier tecla para continuar..."); 
-            ReadKey();
-            Clear();
-        }
-
-        static string ValidarEntradaTexto(int min, int max)
-        {
-            string entrada;
-            while (true)
-            {
-                entrada = ReadLine();
-                if (string.IsNullOrWhiteSpace(entrada))
-                {
-                    Write($"La entrada no puede estar vacía. Ingrese entre {min} y {max} caracteres: ");
-                }
-                else if (entrada.Length < min || entrada.Length > max)
-                {
-                    Write($"La entrada debe tener entre {min} y {max} caracteres: ");
-                }
-                else
-                {
-                    break;
-                }
-            }
-            return entrada;
-        }
-
-        static int ValidarEntero(int min, int max)
-        {
-            int resultado;
-            while (true)
-            {
-                string input = ReadLine();
-                if (!int.TryParse(input, out resultado))
-                {
-                    Write("Entrada no válida. Ingrese un número: ");
-                }
-                else if (resultado < min || resultado > max)
-                {
-                    Write($"El número debe estar entre {min} y {max}: ");
-                }
-                else
-                {
-                    break;
-                }
-            }
-            return resultado;
-        }
-
-        static string ValidarTelefono()
-        {
-            string telefono;
-            while (true)
-            {
-                telefono = ReadLine();
-                if (telefono.All(char.IsDigit))
-                {
-                    break;
-                }
-                else
-                {
-                     Write("El teléfono solo puede contener números. Intente nuevamente: ");
-                }
-            }
-            return telefono;
-        }
-
-        static string ValidarCorreoElectronico()
-        {
-            string correo;
-            while (true)
-            {
-                correo = ReadLine();
-                if (correo.Contains("@"))
-                {
-                    break;
-                }
-                else
-                {
-                    Write("El correo electrónico debe contener el carácter '@'. Intente nuevamente: ");
-                }
-            }
-            return correo;
+            Console.WriteLine("\nPresione cualquier tecla para continuar...");
+            Console.ReadKey();
+            Console.Clear();
         }
     }
 }

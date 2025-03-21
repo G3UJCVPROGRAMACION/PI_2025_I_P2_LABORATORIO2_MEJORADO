@@ -14,9 +14,10 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public GeneroLiterario Genero { get; set; }
         public string ISBN { get; set; }
         public int AñoPublicacion { get; set; }
-        public int CantidadEjemplares { get; set; } 
-        public int EjemplaresDisponibles { get; set; } 
-        public List<Usuario> PrestadoA { get; set; } = new List<Usuario>(); 
+        public int CantidadEjemplares { get; set; }
+        public int EjemplaresDisponibles { get; set; }
+        public List<Usuario> PrestadoA { get; set; } = new List<Usuario>();
+
         public Libro(string titulo, Autor autorLibro, Editorial editorialLibro, GeneroLiterario genero, string isbn, int añoPublicacion, int cantidadEjemplares)
         {
             Titulo = titulo;
@@ -26,7 +27,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             ISBN = isbn;
             AñoPublicacion = añoPublicacion;
             CantidadEjemplares = cantidadEjemplares;
-            EjemplaresDisponibles = cantidadEjemplares; 
+            EjemplaresDisponibles = cantidadEjemplares;
         }
 
         public void MostrarInformacion()
@@ -54,7 +55,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
                    AutorLibro != null &&
                    EditorialLibro != null &&
                    Genero != null &&
-                   CantidadEjemplares > 0; 
+                   CantidadEjemplares > 0;
         }
     }    
 }

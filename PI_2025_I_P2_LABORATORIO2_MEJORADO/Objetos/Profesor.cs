@@ -9,17 +9,39 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
     internal class Profesor : Usuario
     {
         public string Departamento { get; set; }
+        public int AñosExperiencia { get; set; } // Nueva propiedad
+        public bool EsTitular { get; set; } // Nueva propiedad
 
-        public Profesor(string nombre, string apellido, string identificacion, string correo, string telefono, string departamento)
+        public Profesor(string nombre, string apellido, string identificacion, string correo, string telefono, string departamento, int añosExperiencia = 0, bool esTitular = false)
             : base(nombre, apellido, identificacion, correo, telefono)
         {
             Departamento = departamento;
+            AñosExperiencia = añosExperiencia;
+            EsTitular = esTitular;
         }
 
         public override void MostrarInformacion()
         {
             base.MostrarInformacion();
-            Console.WriteLine($"Departamento: {Departamento}");
+            Console.WriteLine($"Departamento: {Departamento}, Años de Experiencia: {AñosExperiencia}, Es Titular: {(EsTitular ? "Sí" : "No")}");
+        }
+
+        // Nuevos métodos
+        public void AumentarExperiencia(int años)
+        {
+            AñosExperiencia += años;
+            Console.WriteLine($"Años de experiencia actualizados a: {AñosExperiencia}");
+        }
+
+        public void CambiarTitularidad(bool esTitular)
+        {
+            EsTitular = esTitular;
+            Console.WriteLine($"Titularidad actualizada a: {(EsTitular ? "Sí" : "No")}");
+        }
+
+        public bool EsProfesorSenior()
+        {
+            return AñosExperiencia >= 10;
         }
     }
 }

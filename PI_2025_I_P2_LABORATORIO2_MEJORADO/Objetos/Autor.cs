@@ -13,19 +13,28 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public string Nacionalidad { get; set; }
         public int AñoNacimiento { get; set; }
         public int CantidadLibrosPublicados { get; set; }
+        public string Pseudonimo { get; set; } // Nueva propiedad
+        public bool EsBestSeller { get; set; } // Nueva propiedad
 
-        public Autor(string nombre, string apellido, string nacionalidad, int añoNacimiento, int cantidadLibrosPublicados)
+        public Autor(string nombre, string apellido, string nacionalidad, int añoNacimiento, int cantidadLibrosPublicados, string pseudonimo = "", bool esBestSeller = false)
         {
             Nombre = nombre;
             Apellido = apellido;
             Nacionalidad = nacionalidad;
             AñoNacimiento = añoNacimiento;
             CantidadLibrosPublicados = cantidadLibrosPublicados;
+            Pseudonimo = pseudonimo;
+            EsBestSeller = esBestSeller;
         }
 
         public void MostrarInformacion()
         {
             Console.WriteLine($"Autor: {Nombre} {Apellido}, Nacionalidad: {Nacionalidad}, Año de Nacimiento: {AñoNacimiento}, Libros Publicados: {CantidadLibrosPublicados}");
+            if (!string.IsNullOrWhiteSpace(Pseudonimo))
+            {
+                Console.WriteLine($"Pseudónimo: {Pseudonimo}");
+            }
+            Console.WriteLine($"Es Best Seller: {(EsBestSeller ? "Sí" : "No")}");
         }
 
         public bool Validar()
@@ -35,6 +44,22 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
                    !string.IsNullOrWhiteSpace(Nacionalidad) &&
                    AñoNacimiento > 0 &&
                    CantidadLibrosPublicados >= 0;
+        }
+        // Nuevos métodos
+        public string ObtenerNombreCompleto()
+        {
+            return $"{Nombre} {Apellido}";
+        }
+
+        public bool EsAutorJoven()
+        {
+            return (DateTime.Now.Year - AñoNacimiento) < 40;
+        }
+
+        public void ActualizarPseudonimo(string nuevoPseudonimo)
+        {
+            Pseudonimo = nuevoPseudonimo;
+            Console.WriteLine($"Pseudónimo actualizado a: {Pseudonimo}");
         }
     }
 }
