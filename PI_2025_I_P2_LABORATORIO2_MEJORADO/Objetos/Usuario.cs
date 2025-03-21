@@ -13,8 +13,8 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public string Identificacion { get; set; }
         public string Correo { get; set; }
         public string Telefono { get; set; }
-        public DateTime FechaRegistro { get; set; } // Nueva propiedad
-        public bool EsActivo { get; set; } // Nueva propiedad
+        public DateTime FechaRegistro { get; set; } 
+        public bool EsActivo { get; set; } 
         public List<Libro> LibrosPrestados { get; set; } = new List<Libro>();
 
         public Usuario(string nombre, string apellido, string identificacion, string correo, string telefono)
@@ -69,17 +69,17 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             return !string.IsNullOrWhiteSpace(Nombre) &&
              !string.IsNullOrWhiteSpace(Apellido) &&
              !string.IsNullOrWhiteSpace(Identificacion) &&
-             ValidarCorreoElectronico(Correo) && // Validar correo electrónico
-             ValidarTelefono(Telefono); // Validar teléfono
+             ValidarCorreoElectronico(Correo) && 
+             ValidarTelefono(Telefono); 
         }
         private bool ValidarTelefono(string telefono)
         {
-            return telefono.All(char.IsDigit); // Solo caracteres numéricos
+            return telefono.All(char.IsDigit);
         }
 
         private bool ValidarCorreoElectronico(string correo)
         {
-            return correo.Contains("@"); // Debe contener el carácter @
+            return correo.Contains("@"); 
         }
     }   
 }

@@ -9,8 +9,8 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
     internal class Profesor : Usuario
     {
         public string Departamento { get; set; }
-        public int AñosExperiencia { get; set; } // Nueva propiedad
-        public bool EsTitular { get; set; } // Nueva propiedad
+        public int AñosExperiencia { get; set; } 
+        public bool EsTitular { get; set; } 
 
         public Profesor(string nombre, string apellido, string identificacion, string correo, string telefono, string departamento, int añosExperiencia = 0, bool esTitular = false)
             : base(nombre, apellido, identificacion, correo, telefono)
@@ -26,7 +26,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             Console.WriteLine($"Departamento: {Departamento}, Años de Experiencia: {AñosExperiencia}, Es Titular: {(EsTitular ? "Sí" : "No")}");
         }
 
-        // Nuevos métodos
+        
         public void AumentarExperiencia(int años)
         {
             AñosExperiencia += años;

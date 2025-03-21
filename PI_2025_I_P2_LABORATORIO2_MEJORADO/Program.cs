@@ -90,11 +90,12 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             }
 
             Write("Año de Publicación (hasta {0}): ", DateTime.Now.Year);
-            int añoPublicacion = Validaciones.ValidarEntero(1000, DateTime.Now.Year, $"Año de Publicación (hasta {DateTime.Now.Year}): ");
+            int añoPublicacion = Validaciones.ValidarEntero(1000, DateTime.Now.Year);
 
             Write("Cantidad de Ejemplares: ");
-            int cantidadEjemplares = Validaciones.ValidarEntero(1, int.MaxValue, "Cantidad de Ejemplares: ");
+            int cantidadEjemplares = Validaciones.ValidarEntero(1, int.MaxValue);
 
+            
             Write("Nombre del Autor (1-50 caracteres): ");
             string nombreAutor = Validaciones.ValidarEntradaTexto(1, 50);
             Write("Apellido del Autor (1-50 caracteres): ");
@@ -106,15 +107,29 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                 string nacionalidad = Validaciones.ValidarEntradaTexto(1, 50);
 
                 Write("Año de Nacimiento del Autor (hasta {0}): ", DateTime.Now.Year);
-                int añoNacimiento = Validaciones.ValidarEntero(1000, DateTime.Now.Year, $"Año de Nacimiento del Autor (hasta {DateTime.Now.Year}): ");
+                int añoNacimiento = Validaciones.ValidarEntero(1000, DateTime.Now.Year);
 
                 Write("Cantidad de Libros Publicados: ");
-                int cantidadLibrosPublicados = Validaciones.ValidarEntero(0, int.MaxValue, "Cantidad de Libros Publicados: ");
+                int cantidadLibrosPublicados = Validaciones.ValidarEntero(0, int.MaxValue);
 
-                autor = new Autor(nombreAutor, apellidoAutor, nacionalidad, añoNacimiento, cantidadLibrosPublicados);
+                Write("¿El autor es best seller? (S/N): ");
+                bool esBestSeller = ReadLine().ToUpper() == "S";
+                bool esBestSellers = Validaciones.ValidarSiNo();
+
+                Write("¿Tiene pseudónimo? (S/N): ");
+                bool tienePseudonimo = Validaciones.ValidarSiNo();
+                string pseudonimo = "";
+                if (ReadLine().ToUpper() == "S")
+                {
+                    Write("Ingrese el pseudónimo (1-50 caracteres): ");
+                    pseudonimo = Validaciones.ValidarEntradaTexto(1, 50);
+                }
+
+                autor = new Autor(nombreAutor, apellidoAutor, nacionalidad, añoNacimiento, cantidadLibrosPublicados, pseudonimo, esBestSeller);
                 autores.Add(autor);
             }
 
+            
             Write("Nombre de la Editorial (1-50 caracteres): ");
             string nombreEditorial = Validaciones.ValidarEntradaTexto(1, 50);
             Editorial editorial = editoriales.FirstOrDefault(e => e.Nombre == nombreEditorial);
@@ -127,27 +142,49 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                 string direccion = Validaciones.ValidarEntradaTexto(1, 100);
 
                 Write("Teléfono de la Editorial (solo números): ");
-                string telefono = Validaciones.ValidarTelefono("Teléfono de la Editorial (solo números): ");
+                string telefono = Validaciones.ValidarTelefono();
 
                 Write("Correo Electrónico de la Editorial (debe contener @): ");
-                string correoElectronico = Validaciones.ValidarCorreoElectronico("Correo Electrónico de la Editorial (debe contener @): ");
+                string correoElectronico = Validaciones.ValidarCorreoElectronico();
 
-                editorial = new Editorial(nombreEditorial, pais, direccion, telefono, correoElectronico);
+                Write("Año de Fundación de la Editorial: ");
+                int añoFundacion = Validaciones.ValidarEntero(1000, DateTime.Now.Year);
+
+                Write("¿La editorial es independiente? (S/N): ");
+                bool esIndependiente = ReadLine().ToUpper() == "S";
+                bool esIndependientes = Validaciones.ValidarSiNo();
+
+                editorial = new Editorial(nombreEditorial, pais, direccion, telefono, correoElectronico, añoFundacion, esIndependiente);
                 editoriales.Add(editorial);
             }
 
+            
             Write("Nombre del Género Literario (1-50 caracteres): ");
             string nombreGenero = Validaciones.ValidarEntradaTexto(1, 50);
             GeneroLiterario genero = generos.FirstOrDefault(g => g.Nombre == nombreGenero);
             if (genero == null)
             {
-                  Write("Tema del Género Literario (1-50 caracteres): ");
+                Write("Tema del Género Literario (1-50 caracteres): ");
                 string tema = Validaciones.ValidarEntradaTexto(1, 50);
 
-                genero = new GeneroLiterario(nombreGenero, tema);
+                Write("Subgénero (1-50 caracteres): ");
+                string subgenero = Validaciones.ValidarEntradaTexto(1, 50);
+
+                Write("¿El género es popular? (S/N): ");
+                bool esPopular = ReadLine().ToUpper() == "S";
+                bool esPopulars = Validaciones.ValidarSiNo();
+
+                Write("Año de Origen del Género: ");
+                int añoOrigen = Validaciones.ValidarEntero(1000, DateTime.Now.Year);
+
+                Write("Descripción del Género (1-200 caracteres): ");
+                string descripcion = Validaciones.ValidarEntradaTexto(1, 200);
+
+                genero = new GeneroLiterario(nombreGenero, tema, subgenero, esPopular, añoOrigen, descripcion);
                 generos.Add(genero);
             }
 
+            
             libros.Add(new Libro(titulo, autor, editorial, genero, isbn, añoPublicacion, cantidadEjemplares));
             WriteLine("Libro agregado correctamente.");
             WriteLine("\nPresione cualquier tecla para continuar...");
@@ -259,20 +296,28 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             }
 
             Write("Correo electrónico del usuario (debe contener @): ");
-            string correo = Validaciones.ValidarCorreoElectronico("Correo electrónico del usuario (debe contener @): ");
+            string correo = Validaciones.ValidarCorreoElectronico();
 
             Write("Teléfono del usuario (solo números): ");
-            string telefono = Validaciones.ValidarTelefono("Teléfono del usuario (solo números): ");
+            string telefono = Validaciones.ValidarTelefono();
 
             Write("¿Es un profesor o un estudiante? (P/E): ");
             string tipoUsuario = ReadLine().ToUpper();
+
 
             if (tipoUsuario == "P")
             {
                 Write("Departamento del profesor (1-50 caracteres): ");
                 string departamento = Validaciones.ValidarEntradaTexto(1, 50);
 
-                Profesor profesor = new Profesor(nombre, apellido, identificacion, correo, telefono, departamento);
+                Write("Años de experiencia del profesor: ");
+                int añosExperiencia = Validaciones.ValidarEntero(0, int.MaxValue);
+
+                Write("¿El profesor es titular? (S/N): ");
+                bool esTitular = ReadLine().ToUpper() == "S";
+                bool esTitulars = Validaciones.ValidarSiNo();
+
+                Profesor profesor = new Profesor(nombre, apellido, identificacion, correo, telefono, departamento, añosExperiencia, esTitular);
                 usuarios.Add(profesor);
                 WriteLine("Profesor agregado correctamente.");
             }
@@ -281,7 +326,13 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                 Write("Carrera del estudiante (1-50 caracteres): ");
                 string carrera = Validaciones.ValidarEntradaTexto(1, 50);
 
-                Estudiante estudiante = new Estudiante(nombre, apellido, identificacion, correo, telefono, carrera);
+                Write("Semestre del estudiante: ");
+                int semestre = Validaciones.ValidarEntero(1, 12);
+
+                   Write("Promedio de calificaciones del estudiante: ");
+                double promedioCalificaciones = Validaciones.ValidarEntero(0, 10);
+
+                Estudiante estudiante = new Estudiante(nombre, apellido, identificacion, correo, telefono, carrera, semestre, promedioCalificaciones);
                 usuarios.Add(estudiante);
                 WriteLine("Estudiante agregado correctamente.");
             }

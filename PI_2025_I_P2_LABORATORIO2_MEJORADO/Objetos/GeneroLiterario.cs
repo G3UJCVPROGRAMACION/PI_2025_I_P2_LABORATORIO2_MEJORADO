@@ -10,11 +10,11 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
     {
         public string Nombre { get; set; }
         public string Tema { get; set; }
-        public string Subgenero { get; set; } // Nueva propiedad
-        public bool EsPopular { get; set; } // Nueva propiedad
-        public int AñoOrigen { get; set; } // Nueva propiedad
-        public string Descripcion { get; set; } // Nueva propiedad
-        public List<string> AutoresRepresentativos { get; set; } = new List<string>(); // Nueva propiedad
+        public string Subgenero { get; set; } 
+        public bool EsPopular { get; set; } 
+        public int AñoOrigen { get; set; } 
+        public string Descripcion { get; set; } 
+        public List<string> AutoresRepresentativos { get; set; } = new List<string>(); 
 
         public GeneroLiterario(string nombre, string tema, string subgenero = "", bool esPopular = false, int añoOrigen = 0, string descripcion = "")
         {
@@ -47,7 +47,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
                    !string.IsNullOrWhiteSpace(Tema);
         }
 
-        // Nuevos métodos
+        
         public void AgregarAutorRepresentativo(string autor)
         {
             AutoresRepresentativos.Add(autor);

@@ -13,8 +13,8 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public string Direccion { get; set; }
         public string Telefono { get; set; }
         public string CorreoElectronico { get; set; }
-        public int AñoFundacion { get; set; } // Nueva propiedad
-        public bool EsIndependiente { get; set; } // Nueva propiedad
+        public int AñoFundacion { get; set; } 
+        public bool EsIndependiente { get; set; } 
 
         public Editorial(string nombre, string pais, string direccion, string telefono, string correoElectronico, int añoFundacion = 0, bool esIndependiente = false)
         {
@@ -38,22 +38,22 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             return !string.IsNullOrWhiteSpace(Nombre) &&
             !string.IsNullOrWhiteSpace(Pais) &&
             !string.IsNullOrWhiteSpace(Direccion) &&
-              ValidarTelefono(Telefono) && // Validar teléfono
-              ValidarCorreoElectronico(CorreoElectronico); // Validar correo electrónico
+              ValidarTelefono(Telefono) && 
+              ValidarCorreoElectronico(CorreoElectronico); 
         }
 
         private bool ValidarTelefono(string telefono)
         {
-            return telefono.All(char.IsDigit); // Solo caracteres numéricos
+            return telefono.All(char.IsDigit); 
         }
 
         private bool ValidarCorreoElectronico(string correo)
         {
-            return correo.Contains("@"); // Debe contener el carácter @
+            return correo.Contains("@"); 
         }
 
 
-        // Nuevos métodos
+        
         public int CalcularAntiguedad()
         {
             return DateTime.Now.Year - AñoFundacion;

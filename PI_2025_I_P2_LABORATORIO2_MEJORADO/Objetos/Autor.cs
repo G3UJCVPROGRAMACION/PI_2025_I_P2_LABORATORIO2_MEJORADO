@@ -13,8 +13,8 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public string Nacionalidad { get; set; }
         public int AñoNacimiento { get; set; }
         public int CantidadLibrosPublicados { get; set; }
-        public string Pseudonimo { get; set; } // Nueva propiedad
-        public bool EsBestSeller { get; set; } // Nueva propiedad
+        public string Pseudonimo { get; set; } 
+        public bool EsBestSeller { get; set; } 
 
         public Autor(string nombre, string apellido, string nacionalidad, int añoNacimiento, int cantidadLibrosPublicados, string pseudonimo = "", bool esBestSeller = false)
         {
@@ -45,7 +45,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
                    AñoNacimiento > 0 &&
                    CantidadLibrosPublicados >= 0;
         }
-        // Nuevos métodos
+        
         public string ObtenerNombreCompleto()
         {
             return $"{Nombre} {Apellido}";

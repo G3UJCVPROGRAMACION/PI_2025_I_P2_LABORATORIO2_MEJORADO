@@ -9,8 +9,8 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
     internal class Estudiante : Usuario
     {
         public string Carrera { get; set; }
-        public int Semestre { get; set; } // Nueva propiedad
-        public double PromedioCalificaciones { get; set; } // Nueva propiedad
+        public int Semestre { get; set; } 
+        public double PromedioCalificaciones { get; set; } 
 
         public Estudiante(string nombre, string apellido, string identificacion, string correo, string telefono, string carrera, int semestre = 1, double promedioCalificaciones = 0.0)
             : base(nombre, apellido, identificacion, correo, telefono)
@@ -26,7 +26,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             Console.WriteLine($"Carrera: {Carrera}, Semestre: {Semestre}, Promedio: {PromedioCalificaciones}");
         }
 
-        // Nuevos métodos
+        
         public void ActualizarSemestre(int nuevoSemestre)
         {
             Semestre = nuevoSemestre;

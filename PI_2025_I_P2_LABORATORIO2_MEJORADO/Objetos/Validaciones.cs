@@ -31,12 +31,12 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             return entrada;
         }
 
-        public static int ValidarEntero(int min, int max, string mensaje)
+        public static int ValidarEntero(int min, int max)
         {
             int resultado;
             while (true)
             {
-                Console.Write(mensaje);
+                
                 string input = Console.ReadLine();
                 if (!int.TryParse(input, out resultado))
                 {
@@ -54,12 +54,12 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             return resultado;
         }
 
-        public static string ValidarTelefono(string mensaje)
+        public static string ValidarTelefono()
         {
             string telefono;
             while (true)
             {
-                Console.Write(mensaje);
+                
                 telefono = Console.ReadLine();
                 if (telefono.All(char.IsDigit))
                 {
@@ -73,12 +73,12 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             return telefono;
         }
 
-        public static string ValidarCorreoElectronico(string mensaje)
+        public static string ValidarCorreoElectronico()
         {
             string correo;
             while (true)
             {
-                Console.Write(mensaje);
+                
                 correo = Console.ReadLine();
                 if (correo.Contains("@"))
                 {
@@ -100,6 +100,24 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public static bool ValidarUsuarioUnico(List<Usuario> usuarios, string identificacion)
         {
             return !usuarios.Any(u => u.Identificacion.Equals(identificacion, StringComparison.OrdinalIgnoreCase));
+        }
+
+        
+        public static bool ValidarSiNo()
+        {
+            while (true)
+            {
+                
+                string entrada = Console.ReadLine().ToUpper(); 
+                if (entrada == "S" || entrada == "N")
+                {
+                    return entrada == "S"; 
+                }
+                else
+                {
+                    Console.WriteLine("Entrada no válida. Debe ser 'S' (Sí) o 'N' (No).");
+                }
+            }
         }
     }
 }
