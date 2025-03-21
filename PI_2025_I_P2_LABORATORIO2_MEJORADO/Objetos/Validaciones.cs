@@ -8,12 +8,12 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
 {
     internal class Validaciones
     {
-        public static string ValidarEntradaTexto(int min, int max, string mensaje)
+        public static string ValidarEntradaTexto(int min, int max)
         {
             string entrada;
             while (true)
             {
-                Console.Write(mensaje);
+                
                 entrada = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(entrada))
                 {

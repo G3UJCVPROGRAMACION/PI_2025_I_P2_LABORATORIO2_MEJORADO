@@ -77,10 +77,10 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
         static void AgregarLibro()
         {
             Write("Título (1-50 caracteres): ");
-            string titulo = Validaciones.ValidarEntradaTexto(1, 50, "Título (1-50 caracteres): ");
+            string titulo = Validaciones.ValidarEntradaTexto(1, 50);
 
             Write("ISBN (10-13 caracteres): ");
-            string isbn = Validaciones.ValidarEntradaTexto(10, 13, "ISBN (10-13 caracteres): ");
+            string isbn = Validaciones.ValidarEntradaTexto(10, 13);
 
             if (!Validaciones.ValidarLibroUnico(libros, titulo, isbn))
             {
@@ -94,14 +94,14 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             int cantidadEjemplares = Validaciones.ValidarEntero(1, int.MaxValue, "Cantidad de Ejemplares: ");
 
             Write("Nombre del Autor (1-50 caracteres): ");
-            string nombreAutor = Validaciones.ValidarEntradaTexto(1, 50, "Nombre del Autor (1-50 caracteres): ");
+            string nombreAutor = Validaciones.ValidarEntradaTexto(1, 50);
             Write("Apellido del Autor (1-50 caracteres): ");
-            string apellidoAutor = Validaciones.ValidarEntradaTexto(1, 50, "Apellido del Autor (1-50 caracteres): ");
+            string apellidoAutor = Validaciones.ValidarEntradaTexto(1, 50);
             Autor autor = autores.FirstOrDefault(a => a.Nombre == nombreAutor && a.Apellido == apellidoAutor);
             if (autor == null)
             {
                 Write("Nacionalidad del Autor (1-50 caracteres): ");
-                string nacionalidad = Validaciones.ValidarEntradaTexto(1, 50, "Nacionalidad del Autor (1-50 caracteres): ");
+                string nacionalidad = Validaciones.ValidarEntradaTexto(1, 50);
 
                 Write("Año de Nacimiento del Autor (hasta {0}): ", DateTime.Now.Year);
                 int añoNacimiento = Validaciones.ValidarEntero(1000, DateTime.Now.Year, $"Año de Nacimiento del Autor (hasta {DateTime.Now.Year}): ");
@@ -114,15 +114,15 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             }
 
             Write("Nombre de la Editorial (1-50 caracteres): ");
-            string nombreEditorial = Validaciones.ValidarEntradaTexto(1, 50, "Nombre de la Editorial (1-50 caracteres): ");
+            string nombreEditorial = Validaciones.ValidarEntradaTexto(1, 50);
             Editorial editorial = editoriales.FirstOrDefault(e => e.Nombre == nombreEditorial);
             if (editorial == null)
             {
                 Write("País de la Editorial (1-50 caracteres): ");
-                string pais = Validaciones.ValidarEntradaTexto(1, 50, "País de la Editorial (1-50 caracteres): ");
+                string pais = Validaciones.ValidarEntradaTexto(1, 50);
 
                 Write("Dirección de la Editorial (1-100 caracteres): ");
-                string direccion = Validaciones.ValidarEntradaTexto(1, 100, "Dirección de la Editorial (1-100 caracteres): ");
+                string direccion = Validaciones.ValidarEntradaTexto(1, 100);
 
                 Write("Teléfono de la Editorial (solo números): ");
                 string telefono = Validaciones.ValidarTelefono("Teléfono de la Editorial (solo números): ");
@@ -135,12 +135,12 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             }
 
             Write("Nombre del Género Literario (1-50 caracteres): ");
-            string nombreGenero = Validaciones.ValidarEntradaTexto(1, 50, "Nombre del Género Literario (1-50 caracteres): ");
+            string nombreGenero = Validaciones.ValidarEntradaTexto(1, 50);
             GeneroLiterario genero = generos.FirstOrDefault(g => g.Nombre == nombreGenero);
             if (genero == null)
             {
                   Write("Tema del Género Literario (1-50 caracteres): ");
-                string tema = Validaciones.ValidarEntradaTexto(1, 50, "Tema del Género Literario (1-50 caracteres): ");
+                string tema = Validaciones.ValidarEntradaTexto(1, 50);
 
                 genero = new GeneroLiterario(nombreGenero, tema);
                 generos.Add(genero);
@@ -243,13 +243,13 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
         static void AgregarUsuario()
         {
             Write("Nombre del usuario (1-50 caracteres): ");
-            string nombre = Validaciones.ValidarEntradaTexto(1, 50, "Nombre del usuario (1-50 caracteres): ");
+            string nombre = Validaciones.ValidarEntradaTexto(1, 50);
 
             Write("Apellido del usuario (1-50 caracteres): ");
-            string apellido = Validaciones.ValidarEntradaTexto(1, 50, "Apellido del usuario (1-50 caracteres): ");
+            string apellido = Validaciones.ValidarEntradaTexto(1, 50);
 
             Write("Identificación del usuario (1-20 caracteres): ");
-            string identificacion = Validaciones.ValidarEntradaTexto(1, 20, "Identificación del usuario (1-20 caracteres): ");
+            string identificacion = Validaciones.ValidarEntradaTexto(1, 20);
 
             if (!Validaciones.ValidarUsuarioUnico(usuarios, identificacion))
             {
@@ -268,7 +268,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             if (tipoUsuario == "P")
             {
                 Write("Departamento del profesor (1-50 caracteres): ");
-                string departamento = Validaciones.ValidarEntradaTexto(1, 50, "Departamento del profesor (1-50 caracteres): ");
+                string departamento = Validaciones.ValidarEntradaTexto(1, 50);
 
                 Profesor profesor = new Profesor(nombre, apellido, identificacion, correo, telefono, departamento);
                 usuarios.Add(profesor);
@@ -277,7 +277,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             else if (tipoUsuario == "E")
             {
                 Write("Carrera del estudiante (1-50 caracteres): ");
-                string carrera = Validaciones.ValidarEntradaTexto(1, 50, "Carrera del estudiante (1-50 caracteres): ");
+                string carrera = Validaciones.ValidarEntradaTexto(1, 50);
 
                 Estudiante estudiante = new Estudiante(nombre, apellido, identificacion, correo, telefono, carrera);
                 usuarios.Add(estudiante);
