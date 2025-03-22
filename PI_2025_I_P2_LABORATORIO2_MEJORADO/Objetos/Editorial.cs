@@ -14,9 +14,9 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public string Telefono { get; set; }
         public string CorreoElectronico { get; set; }
         public int AñoFundacion { get; set; } 
-        public bool EsIndependiente { get; set; } 
+        public string EsIndependiente { get; set; } 
 
-        public Editorial(string nombre, string pais, string direccion, string telefono, string correoElectronico, int añoFundacion = 0, bool esIndependiente = false)
+        public Editorial(string nombre, string pais, string direccion, string telefono, string correoElectronico, int añoFundacion = 0, string esIndependiente = "")
         {
             Nombre = nombre;
             Pais = pais;
@@ -30,7 +30,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public void MostrarInformacion()
         {
             Console.WriteLine($"Editorial: {Nombre}, País: {Pais}, Dirección: {Direccion}, Teléfono: {Telefono}, Correo Electrónico: {CorreoElectronico}");
-            Console.WriteLine($"Año de Fundación: {AñoFundacion}, Es Independiente: {(EsIndependiente ? "Sí" : "No")}");
+            Console.WriteLine($"Año de Fundación: {AñoFundacion},");
         }
 
         public bool Validar()
@@ -59,10 +59,10 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             return DateTime.Now.Year - AñoFundacion;
         }
 
-        public void CambiarEstadoIndependiente(bool nuevoEstado)
+        public void CambiarEstadoIndependiente(string nuevoEstado)
         {
             EsIndependiente = nuevoEstado;
-            Console.WriteLine($"Estado de independencia actualizado a: {(EsIndependiente ? "Sí" : "No")}");
+            Console.WriteLine($"Estado de independencia actualizado a: {EsIndependiente}");
         }
 
         public string ObtenerInformacionContacto()

@@ -103,15 +103,16 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         }
 
         
-        public static bool ValidarSiNo()
+        public static string ValidarSiNo()
         {
+            string sino;
             while (true)
             {
                 
-                string entrada = Console.ReadLine().ToUpper(); 
-                if (entrada == "S" || entrada == "N")
+                sino = Console.ReadLine().ToUpper(); 
+                if (sino == "S" || sino == "N")
                 {
-                    return entrada == "S"; 
+                    return sino; 
                 }
                 else
                 {

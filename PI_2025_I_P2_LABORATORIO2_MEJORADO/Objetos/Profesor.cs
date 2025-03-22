@@ -10,9 +10,9 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
     {
         public string Departamento { get; set; }
         public int AñosExperiencia { get; set; } 
-        public bool EsTitular { get; set; } 
+        public string EsTitular { get; set; } 
 
-        public Profesor(string nombre, string apellido, string identificacion, string correo, string telefono, string departamento, int añosExperiencia = 0, bool esTitular = false)
+        public Profesor(string nombre, string apellido, string identificacion, string correo, string telefono, string departamento, int añosExperiencia = 0, string esTitular = "")
             : base(nombre, apellido, identificacion, correo, telefono)
         {
             Departamento = departamento;
@@ -23,7 +23,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public override void MostrarInformacion()
         {
             base.MostrarInformacion();
-            Console.WriteLine($"Departamento: {Departamento}, Años de Experiencia: {AñosExperiencia}, Es Titular: {(EsTitular ? "Sí" : "No")}");
+            Console.WriteLine($"Departamento: {Departamento}, Años de Experiencia: {AñosExperiencia}");
         }
 
         
@@ -33,10 +33,10 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
             Console.WriteLine($"Años de experiencia actualizados a: {AñosExperiencia}");
         }
 
-        public void CambiarTitularidad(bool esTitular)
+        public void CambiarTitularidad(string esTitular)
         {
             EsTitular = esTitular;
-            Console.WriteLine($"Titularidad actualizada a: {(EsTitular ? "Sí" : "No")}");
+            Console.WriteLine($"Titularidad actualizada a: {EsTitular}");
         }
 
         public bool EsProfesorSenior()

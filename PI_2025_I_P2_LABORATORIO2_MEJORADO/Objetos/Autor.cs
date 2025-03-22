@@ -30,11 +30,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public void MostrarInformacion()
         {
             Console.WriteLine($"Autor: {Nombre} {Apellido}, Nacionalidad: {Nacionalidad}, Año de Nacimiento: {AñoNacimiento}, Libros Publicados: {CantidadLibrosPublicados}");
-            if (!string.IsNullOrWhiteSpace(Pseudonimo))
-            {
-                Console.WriteLine($"Pseudónimo: {Pseudonimo}");
-            }
-            Console.WriteLine($"Es Best Seller: {(EsBestSeller ? "Sí" : "No")}");
+            
         }
 
         public bool Validar()

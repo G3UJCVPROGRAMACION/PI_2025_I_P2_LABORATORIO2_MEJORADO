@@ -92,7 +92,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
             Write("Año de Publicación (hasta {0}): ", DateTime.Now.Year);
             int añoPublicacion = Validaciones.ValidarEntero(1000, DateTime.Now.Year);
 
-            Write("Cantidad de Ejemplares: ");
+            Write("Cantidad de Ejemplares disponibles en biblioteca: ");
             int cantidadEjemplares = Validaciones.ValidarEntero(1, int.MaxValue);
 
             
@@ -109,23 +109,10 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                 Write("Año de Nacimiento del Autor (hasta {0}): ", DateTime.Now.Year);
                 int añoNacimiento = Validaciones.ValidarEntero(1000, DateTime.Now.Year);
 
-                Write("Cantidad de Libros Publicados: ");
+                Write("Cantidad de ejemplares impresos: ");
                 int cantidadLibrosPublicados = Validaciones.ValidarEntero(0, int.MaxValue);
 
-                Write("¿El autor es best seller? (S/N): ");
-                bool esBestSeller = ReadLine().ToUpper() == "S";
-                bool esBestSellers = Validaciones.ValidarSiNo();
-
-                Write("¿Tiene pseudónimo? (S/N): ");
-                bool tienePseudonimo = Validaciones.ValidarSiNo();
-                string pseudonimo = "";
-                if (ReadLine().ToUpper() == "S")
-                {
-                    Write("Ingrese el pseudónimo (1-50 caracteres): ");
-                    pseudonimo = Validaciones.ValidarEntradaTexto(1, 50);
-                }
-
-                autor = new Autor(nombreAutor, apellidoAutor, nacionalidad, añoNacimiento, cantidadLibrosPublicados, pseudonimo, esBestSeller);
+                autor = new Autor(nombreAutor, apellidoAutor, nacionalidad, añoNacimiento, cantidadLibrosPublicados);
                 autores.Add(autor);
             }
 
@@ -150,11 +137,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                 Write("Año de Fundación de la Editorial: ");
                 int añoFundacion = Validaciones.ValidarEntero(1000, DateTime.Now.Year);
 
-                Write("¿La editorial es independiente? (S/N): ");
-                bool esIndependiente = ReadLine().ToUpper() == "S";
-                bool esIndependientes = Validaciones.ValidarSiNo();
-
-                editorial = new Editorial(nombreEditorial, pais, direccion, telefono, correoElectronico, añoFundacion, esIndependiente);
+                editorial = new Editorial(nombreEditorial, pais, direccion, telefono, correoElectronico, añoFundacion);
                 editoriales.Add(editorial);
             }
 
@@ -167,20 +150,9 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                 Write("Tema del Género Literario (1-50 caracteres): ");
                 string tema = Validaciones.ValidarEntradaTexto(1, 50);
 
-                Write("Subgénero (1-50 caracteres): ");
-                string subgenero = Validaciones.ValidarEntradaTexto(1, 50);
+               
 
-                Write("¿El género es popular? (S/N): ");
-                bool esPopular = ReadLine().ToUpper() == "S";
-                bool esPopulars = Validaciones.ValidarSiNo();
-
-                Write("Año de Origen del Género: ");
-                int añoOrigen = Validaciones.ValidarEntero(1000, DateTime.Now.Year);
-
-                Write("Descripción del Género (1-200 caracteres): ");
-                string descripcion = Validaciones.ValidarEntradaTexto(1, 200);
-
-                genero = new GeneroLiterario(nombreGenero, tema, subgenero, esPopular, añoOrigen, descripcion);
+                genero = new GeneroLiterario(nombreGenero, tema);
                 generos.Add(genero);
             }
 
@@ -313,11 +285,9 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                 Write("Años de experiencia del profesor: ");
                 int añosExperiencia = Validaciones.ValidarEntero(0, int.MaxValue);
 
-                Write("¿El profesor es titular? (S/N): ");
-                bool esTitular = ReadLine().ToUpper() == "S";
-                bool esTitulars = Validaciones.ValidarSiNo();
+               
 
-                Profesor profesor = new Profesor(nombre, apellido, identificacion, correo, telefono, departamento, añosExperiencia, esTitular);
+                Profesor profesor = new Profesor(nombre, apellido, identificacion, correo, telefono, departamento, añosExperiencia);
                 usuarios.Add(profesor);
                 WriteLine("Profesor agregado correctamente.");
             }
