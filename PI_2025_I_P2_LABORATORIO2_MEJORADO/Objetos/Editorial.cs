@@ -30,7 +30,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public void MostrarInformacion()
         {
             Console.WriteLine($"Editorial: {Nombre}, País: {Pais}, Dirección: {Direccion}, Teléfono: {Telefono}, Correo Electrónico: {CorreoElectronico}");
-            Console.WriteLine($"Año de Fundación: {AñoFundacion},");
+            Console.WriteLine($"Año de Fundación: {AñoFundacion}");
         }
 
         public bool Validar()

@@ -10,14 +10,18 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
     {
         public string Departamento { get; set; }
         public int AñosExperiencia { get; set; } 
-        public string EsTitular { get; set; } 
+        public string EsTitular { get; set; }
+        public int Edad { get; set; }
+        public string EstadoCivil { get; set; }
 
-        public Profesor(string nombre, string apellido, string identificacion, string correo, string telefono, string departamento, int añosExperiencia = 0, string esTitular = "")
+        public Profesor(string nombre, string apellido, string identificacion, string correo, string telefono, string departamento, int añosExperiencia = 0, string esTitular = "", int edad = 0, string estadoCivil = "")
             : base(nombre, apellido, identificacion, correo, telefono)
         {
             Departamento = departamento;
             AñosExperiencia = añosExperiencia;
             EsTitular = esTitular;
+            Edad = edad;
+            EstadoCivil = estadoCivil;
         }
 
         public override void MostrarInformacion()

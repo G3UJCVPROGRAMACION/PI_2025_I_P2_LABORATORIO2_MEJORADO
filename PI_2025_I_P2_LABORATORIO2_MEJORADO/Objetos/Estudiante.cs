@@ -11,13 +11,17 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
         public string Carrera { get; set; }
         public int Semestre { get; set; } 
         public double PromedioCalificaciones { get; set; } 
+        public int Edad { get; set; }
+        public string EstadoCivil { get; set; }
 
-        public Estudiante(string nombre, string apellido, string identificacion, string correo, string telefono, string carrera, int semestre = 1, double promedioCalificaciones = 0.0)
+        public Estudiante(string nombre, string apellido, string identificacion, string correo, string telefono, string carrera, int semestre = 1, double promedioCalificaciones = 0.0, int edad = 0, string estadoCivil = "")
             : base(nombre, apellido, identificacion, correo, telefono)
         {
             Carrera = carrera;
             Semestre = semestre;
             PromedioCalificaciones = promedioCalificaciones;
+            Edad = edad;
+            EstadoCivil = estadoCivil;
         }
 
         public override void MostrarInformacion()
@@ -41,7 +45,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO.Objetos
 
         public bool EsBecado()
         {
-            return PromedioCalificaciones >= 9.0;
+            return PromedioCalificaciones >= 90;
         }
     }
 }

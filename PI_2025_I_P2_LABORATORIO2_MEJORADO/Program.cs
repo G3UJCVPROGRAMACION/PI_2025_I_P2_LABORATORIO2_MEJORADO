@@ -300,7 +300,7 @@ namespace PI_2025_I_P2_LABORATORIO2_MEJORADO
                 int semestre = Validaciones.ValidarEntero(1, 12);
 
                    Write("Promedio de calificaciones del estudiante: ");
-                double promedioCalificaciones = Validaciones.ValidarEntero(0, 10);
+                double promedioCalificaciones = Validaciones.ValidarEntero(0, 100);
 
                 Estudiante estudiante = new Estudiante(nombre, apellido, identificacion, correo, telefono, carrera, semestre, promedioCalificaciones);
                 usuarios.Add(estudiante);
